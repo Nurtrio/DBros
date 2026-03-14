@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #0031e2;
+  --brand-light: #e6eaff;
+  --brand-mid: #b3beff;
+  --brand-dark: #0026b0;
+  --blue-50: #e6eaff;
+  --blue-100: #e6eaff;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-full: 9999px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: #ffffff;
+  color: #0f172a;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='0.6' fill='%230031e2'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 32px 32px;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(10px, -15px); }
+  66% { transform: translate(-8px, 10px); }
+}
+
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes chipIn {
+  from { opacity: 0; transform: scale(0.85) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 20s ease-in-out infinite;
+}
+
+.animate-float-slow-reverse {
+  animation: floatSlow 16s ease-in-out infinite reverse;
+}
+
+.animate-float-slow-delayed {
+  animation: floatSlow 14s ease-in-out 2s infinite;
+}
+
+.animate-float-badge {
+  animation: floatBadge 4s ease-in-out infinite;
+}
+
+.animate-ring-pulse {
+  animation: ringPulse 2s ease infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease 0.2s both;
+}
+
+.animate-fade-up-1 {
+  animation: fadeUp 0.7s ease 0.3s both;
+}
+
+.animate-fade-up-2 {
+  animation: fadeUp 0.7s ease 0.45s both;
+}
+
+.animate-fade-up-3 {
+  animation: fadeUp 0.7s ease 0.6s both;
+}
+
+.animate-fade-in-hero {
+  animation: fadeIn 0.9s ease 0.5s both;
+}
+
+.chip-animate {
+  animation: chipIn 0.4s ease both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-scrolled {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+
+.calc-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%230031e2' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.hero-card-before {
+  position: relative;
+}
+
+.hero-card-before::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #b3beff, transparent 50%, #b3beff);
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.service-card-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0031e2, #0026b0);
+  transform: scaleX(0);
+  transition: transform 0.35s ease;
+}
+
+.service-card-bar:hover::after {
+  transform: scaleX(1);
+}
+
+.section-heading {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.font-fraunces {
+  font-family: 'Fraunces', serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
