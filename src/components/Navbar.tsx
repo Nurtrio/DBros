@@ -16,11 +16,11 @@ export default function Navbar() {
       className={`fixed top-0 w-full z-[1000] transition-all duration-300 ${
         scrolled ? 'nav-scrolled py-3' : 'py-[18px]'
       }`}
-      style={{ background: scrolled ? undefined : 'rgba(255,255,255,0)' }}
+      style={{ background: scrolled ? undefined : 'rgba(255,255,255,0.65)', backdropFilter: scrolled ? undefined : 'blur(12px)', WebkitBackdropFilter: scrolled ? undefined : 'blur(12px)' }}
     >
       <div className="max-w-[1240px] mx-auto px-8 flex items-center justify-between">
         <a href="#" className="no-underline shrink-0">
-          <img src="/dbros_new_logo.png" alt="D Bros Portables" className="h-[90px] w-auto" />
+          <img src="/Dbros22.png" alt="D Bros Portables" className="h-[90px] w-auto" />
         </a>
 
         <ul className="hidden lg:flex items-center gap-8 list-none">

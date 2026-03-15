@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-[1240px] mx-auto px-8 max-md:px-5">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12 mb-12">
           <div>
-            <img src="/dbros_new_logo.png" alt="D Bros Portables" className="h-16 w-auto mb-3 brightness-0 invert" />
+            <img src="/Dbros22.png" alt="D Bros Portables" className="h-16 w-auto mb-3 brightness-0 invert mix-blend-screen" />
             <div className="text-sm leading-[1.7] max-w-[280px]">
               Premium portable sanitation solutions for the greater Los Angeles area, Orange County, and Inland Empire. Family-owned, customer-first.
             </div>
@@ -40,7 +40,7 @@ export default function Footer() {
 
         <div className="border-t border-white/[0.08] pt-6 flex justify-between items-center text-xs text-white/40 max-md:flex-col max-md:gap-2 max-md:text-center">
           <span>&copy; 2026 D Bros Portables. All rights reserved.</span>
-          <span>Family Owned &amp; Operated</span>
+          <span>Site built by <a href="https://www.urbanframeoc.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#b3beff] transition-colors no-underline">www.UrbanFrameOC.com</a></span>
         </div>
       </div>
     </footer>

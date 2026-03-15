@@ -4,7 +4,7 @@ import Hero from './components/Hero';
 import TrustStrip from './components/TrustStrip';
 import About from './components/About';
 import Services from './components/Services';
-import Trailers from './components/Trailers';
+import Fleet from './components/Fleet';
 import ServiceAreas from './components/ServiceAreas';
 import Calculator from './components/Calculator';
 import Process from './components/Process';
@@ -22,7 +22,7 @@ function App() {
       <TrustStrip />
       <About />
       <Services />
-      <Trailers />
+      <Fleet />
       <ServiceAreas />
       <Calculator />
       <Process />

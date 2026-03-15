@@ -14,8 +14,20 @@ export function useScrollReveal() {
       { threshold: 0.08 }
     );
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    const observe = () => {
+      document.querySelectorAll('.reveal:not(.vis)').forEach((el) => observer.observe(el));
+    };
 
-    return () => observer.disconnect();
+    // Initial scan
+    observe();
+
+    // Re-scan when DOM changes (catches async-rendered components)
+    const mutation = new MutationObserver(observe);
+    mutation.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mutation.disconnect();
+    };
   }, []);
 }
