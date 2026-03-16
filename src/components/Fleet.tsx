@@ -3,6 +3,7 @@ const units = [
     name: '8–4 Stall Restroom Trailer',
     tag: 'Premium',
     tagColor: 'bg-amber-500',
+    image: '/Screenshot_2026-03-14_at_6.09.31_PM.png',
     description: 'Self contained, outside wash station with running water.',
     features: ['Interior Lights', 'Paper Towels', 'Hand Soap', 'Toilet Paper', 'Seat Covers', 'A/C'],
   },
