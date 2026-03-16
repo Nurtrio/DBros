@@ -19,7 +19,7 @@ const units = [
     name: '2 Stall VIP Solar Trailer',
     tag: 'VIP',
     tagColor: 'bg-emerald-500',
-    image: 'blob:https://imgur.com/3f7030ef-437a-4d80-bca4-4450117631f7',
+    image: 'https://i.imgur.com/trWXmFN.jpeg',
     description: 'Solar powered trailer — great for events. Self contained, sinks with running water.',
     features: ['Interior Lights', 'Paper Towels', 'Hand Soap', 'Toilet Paper', 'Seat Covers', 'A/C'],
   },
