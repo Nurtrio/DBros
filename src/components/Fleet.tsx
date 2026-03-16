@@ -17,6 +17,7 @@ const units = [
     name: '2 Stall VIP Solar Trailer',
     tag: 'VIP',
     tagColor: 'bg-emerald-500',
+    image: '/Screenshot_2026-03-14_at_6.09.31_PM.png',
     description: 'Solar powered trailer — great for events. Self contained, sinks with running water.',
     features: ['Interior Lights', 'Paper Towels', 'Hand Soap', 'Toilet Paper', 'Seat Covers', 'A/C'],
   },
@@ -70,7 +71,16 @@ export default function Fleet() {
                 i < units.length - 1 ? 'border-r border-gray-100 max-lg:[&:nth-child(3)]:border-r-0 max-sm:[&:nth-child(2n)]:border-r-0' : ''
               } max-lg:[&:nth-child(n+4)]:border-t max-lg:border-gray-100 max-sm:[&:nth-child(n+3)]:border-t`}
             >
-              {/* Tag */}
+              {'image' in unit && unit.image && (
+                <div className="w-full aspect-[4/3] rounded-lg overflow-hidden mb-3 -mt-0.5">
+                  <img
+                    src={unit.image}
+                    alt={unit.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+
               <span className={`self-start px-2 py-0.5 ${unit.tagColor} text-white text-[10px] font-bold tracking-wider uppercase rounded-full mb-2.5`}>
                 {unit.tag}
               </span>
