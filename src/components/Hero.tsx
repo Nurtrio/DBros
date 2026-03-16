@@ -8,8 +8,7 @@ export default function Hero() {
         <img
           src="/Dbros_Hero2.jpg"
           alt="D Bros Portables worker cleaning a portable restroom on site"
-          className="w-full h-full object-cover"
-          style={{ objectPosition: '10% 20%' }}
+          className="w-full h-full object-cover max-md:object-[center_20%] md:object-[10%_20%]"
         />
       </div>
 
