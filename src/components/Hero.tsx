@@ -34,14 +34,15 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative max-w-[1240px] mx-auto px-8 w-full py-20">
+      <div className="relative max-w-[1240px] mx-auto px-8 w-full pt-36 pb-20 md:py-20">
         <div className="max-w-[560px]">
           <div className="flex flex-wrap gap-2.5 mb-7 animate-fade-in">
-            <div className="inline-flex items-center gap-2 py-[7px] pl-2.5 pr-4 bg-white/90 backdrop-blur-sm border border-mist rounded-full text-[13px] font-medium text-charcoal"
+            <div className="inline-flex items-center gap-1.5 md:gap-2 py-1.5 md:py-[7px] pl-2 md:pl-2.5 pr-3 md:pr-4 bg-white/90 backdrop-blur-sm border border-mist rounded-full text-[11px] md:text-[13px] font-medium text-charcoal"
               style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.04)' }}
             >
-              <div className="w-6 h-6 bg-[#0031e2] rounded-full flex items-center justify-center">
-                <Check size={12} className="text-white" />
+              <div className="w-5 h-5 md:w-6 md:h-6 bg-[#0031e2] rounded-full flex items-center justify-center shrink-0">
+                <Check size={10} className="text-white md:hidden" />
+                <Check size={12} className="text-white hidden md:block" />
               </div>
               Family Owned &amp; Operated — Serving All of SoCal
             </div>
