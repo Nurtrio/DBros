@@ -12,13 +12,23 @@ export default function Hero() {
         />
       </div>
 
-      {/* Left-to-right white fade overlay — smooth gradual fade */}
+      {/* Desktop: left-to-right white fade overlay */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hidden md:block"
         style={{
           background: `
             linear-gradient(to right, #ffffff 0%, #ffffff 38%, rgba(255,255,255,0.9) 44%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0.55) 56%, rgba(255,255,255,0.35) 62%, rgba(255,255,255,0.15) 70%, rgba(255,255,255,0.05) 78%, transparent 88%),
             linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 15%, transparent 85%, rgba(255,255,255,0.2) 100%)
+          `,
+        }}
+      />
+
+      {/* Mobile: full-cover gradient so image fills background but text stays readable */}
+      <div
+        className="absolute inset-0 md:hidden"
+        style={{
+          background: `
+            linear-gradient(to bottom, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.82) 35%, rgba(255,255,255,0.55) 60%, rgba(255,255,255,0.2) 80%, transparent 100%)
           `,
         }}
       />
