@@ -20,7 +20,7 @@ export default function Navbar() {
     >
       <div className="max-w-[1240px] mx-auto px-8 flex items-center justify-between">
         <a href="#" className="no-underline shrink-0">
-          <img src="/Dbros22.png" alt="D Bros Portables" className="h-[90px] w-auto" />
+          <img src="https://i.imgur.com/74K2YRF.png" alt="D Bros Portables" className="h-[90px] w-auto" />
         </a>
 
         <ul className="hidden lg:flex items-center gap-8 list-none">
