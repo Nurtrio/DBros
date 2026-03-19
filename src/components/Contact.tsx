@@ -1,14 +1,53 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowRight, Loader2 } from 'lucide-react';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    (e.target as HTMLFormElement).reset();
+    setSending(true);
+    setError('');
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const payload = {
+      fullName: formData.get('fullName') as string,
+      phone: formData.get('phone') as string,
+      email: formData.get('email') as string,
+      unitType: formData.get('unitType') as string,
+      city: formData.get('city') as string,
+      eventDate: formData.get('eventDate') as string,
+      duration: formData.get('duration') as string,
+      details: formData.get('details') as string,
+    };
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!res.ok) throw new Error('Failed to send');
+
+      setSubmitted(true);
+      form.reset();
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch {
+      setError('Something went wrong. Please call us at 323-371-6675 or try again.');
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -71,27 +110,33 @@ export default function Contact() {
             </div>
           )}
 
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-[18px]">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">Full Name</label>
-                <input type="text" placeholder="John Doe" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
+                <input name="fullName" type="text" placeholder="John Doe" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
               </div>
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">Phone</label>
-                <input type="tel" placeholder="(323) 000-0000" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
+                <input name="phone" type="tel" placeholder="(323) 000-0000" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
               </div>
             </div>
 
             <div className="mb-[18px]">
               <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">Email</label>
-              <input type="email" placeholder="john@example.com" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
+              <input name="email" type="email" placeholder="john@example.com" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-[18px]">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">Type of Unit</label>
-                <select required className="calc-select w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow cursor-pointer transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]">
+                <select name="unitType" required className="calc-select w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow cursor-pointer transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]">
                   <option value="">Select type</option>
                   <option>Portable Toilet</option>
                   <option>Handwashing Station</option>
@@ -101,18 +146,18 @@ export default function Contact() {
               </div>
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">City</label>
-                <input type="text" placeholder="e.g. Los Angeles" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
+                <input name="city" type="text" placeholder="e.g. Los Angeles" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 mb-[18px]">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">Event Date</label>
-                <input type="date" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
+                <input name="eventDate" type="date" required className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
               </div>
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">Duration Needed</label>
-                <select className="calc-select w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow cursor-pointer transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]">
+                <select name="duration" className="calc-select w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow cursor-pointer transition-all focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]">
                   <option value="">Select duration</option>
                   <option>1 Day</option>
                   <option>Weekend (2-3 Days)</option>
@@ -126,16 +171,26 @@ export default function Contact() {
 
             <div className="mb-[18px]">
               <label className="block text-xs font-semibold uppercase tracking-[0.8px] text-[#0031e2] mb-1.5">Additional Details</label>
-              <textarea placeholder="Tell us about your event, number of guests, special requirements..." className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all resize-y min-h-[90px] focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
+              <textarea name="details" placeholder="Tell us about your event, number of guests, special requirements..." className="w-full px-4 py-[13px] border-[1.5px] border-mist rounded-[10px] text-sm text-ink bg-snow transition-all resize-y min-h-[90px] focus:outline-none focus:border-[#0031e2] focus:ring-[3px] focus:ring-[#0031e2]/[0.08]" />
             </div>
 
             <button
               type="submit"
-              className="w-full inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#0031e2] text-white rounded-full font-semibold text-[15px] border-none cursor-pointer transition-all hover:-translate-y-0.5 group"
+              disabled={sending}
+              className="w-full inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#0031e2] text-white rounded-full font-semibold text-[15px] border-none cursor-pointer transition-all hover:-translate-y-0.5 group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               style={{ boxShadow: '0 4px 16px rgba(0,49,226,0.25)' }}
             >
-              Send Quote Request
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-[3px]" />
+              {sending ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Quote Request
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-[3px]" />
+                </>
+              )}
             </button>
           </form>
         </div>
