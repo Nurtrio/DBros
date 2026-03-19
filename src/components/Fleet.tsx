@@ -37,7 +37,7 @@ const units = [
     image: 'https://i.imgur.com/b4oQsOf.jpeg',
     tagColor: 'bg-gray-500',
     description: 'Regular porta potty — a standard unit for any job site or event.',
-    features: ['Non-Flushing', 'Separate Urinal', 'Toilet Paper', 'Seat Covers', 'Hand Sanitizer'],
+    features: ['Non-Flushing', 'Separate Urinal', 'Toilet Paper', 'Seat Covers'],
   },
   {
     name: 'Double Sided Handwash Sinks',
